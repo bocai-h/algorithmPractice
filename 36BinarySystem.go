@@ -40,9 +40,7 @@ func Add(n string, m string) (result string) {
 
 	carry := 0
 	for j := len(n) - 1; j >= 0; j-- {
-		njstr := fmt.Sprintf("%c", n[j])
-		mjstr := fmt.Sprintf("%c", m[j])
-		addition := stringTo10BinarySystemMap[njstr] + stringTo10BinarySystemMap[mjstr] + carry
+		addition := stringTo10BinarySystemMap[string(n[j])] + stringTo10BinarySystemMap[string(m[j])] + carry
 		//clear carry
 		carry = 0
 		r := 0

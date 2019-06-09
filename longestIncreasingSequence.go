@@ -12,6 +12,7 @@ func main() {
 	}
 }
 
+//O(n**2)
 func getDp1(sArray []int) (dp []int) {
 	//dp record when index to i end, max asc length
 	dp = make([]int, len(sArray))
@@ -26,6 +27,7 @@ func getDp1(sArray []int) (dp []int) {
 	return dp
 }
 
+//O(nlogn)
 func getDp2(sArray []int) (dp []int) {
 	dp = make([]int, len(sArray))
 	ends := make([]int, 0, len(sArray))

@@ -4,7 +4,8 @@ import "fmt"
 
 func main() {
 	sources := []int{2, 1, 5, 3, 6, 4, 8, 9, 7}
-	dp := getDp1(sources)
+	dp := getDp2(sources)
+	fmt.Printf("dp=%v\n", dp)
 	des := generateLIS(sources, dp)
 	for _, item := range des {
 		fmt.Printf("%v ", item)
@@ -21,6 +22,37 @@ func getDp1(sArray []int) (dp []int) {
 				dp[i] = mathMax(dp[i], dp[j]+1)
 			}
 		}
+	}
+	return dp
+}
+
+func getDp2(sArray []int) (dp []int) {
+	dp = make([]int, len(sArray))
+	ends := make([]int, 0, len(sArray))
+	ends = append(ends, sArray[0])
+	dp[0] = 1
+	right := 0
+	for i, sitem := range sArray {
+		//    二分法查找
+		l := 0
+		r := right
+		for {
+			if l > r {
+				break
+			}
+			m := (l + r) / 2
+			if sitem > ends[m] {
+				l = m + 1
+			} else {
+				r = m - 1
+			}
+		}
+		right = mathMax(right, l)
+		if len(ends)-1 < l {
+			ends = append(ends, 0)
+		}
+		ends[l] = sitem
+		dp[i] = l + 1
 	}
 	return dp
 }
